@@ -26,7 +26,7 @@ def print_red(print_str):
 """			
 def usage():
 	print("Usage: ")
-	print("  python holmer_binlog_parse.py -uholmer -pholmer -h192.168.247.202 -P3306 -Btest -f d123.txt -o binlog_output_convert.txt -m convert -d yes -i yes -M no")
+	print("  python binlog_parse.py -uholmer -pholmer -h192.168.247.202 -P3306 -Btest -f d123.txt -o binlog_output_convert.txt -m convert -d yes -i yes -M no")
 	print("  --------------------------------------------------------------------------------------------------------------------------------------------- ")
 	print("  -f, --file             Parse file. eg: mysqlbinlog -vvv /disk2/holmer/master-bin.000017 > /disk2/holmer/d123.txt ")
 	print("  -o, --outfile          Output file. ")
@@ -344,8 +344,8 @@ def parse_binlog_file():
 	调用例子: 
 		cp /disk2/mysql_3306/binlog/master-bin.000017 /disk2/holmer/
 		mysqlbinlog -vvv /disk2/holmer/master-bin.000017 > /disk2/holmer/d123.txt 
-		time python holmer_binlog_parse.py  -uholmer -pholmer -h192.168.247.202 -P3306 -Btest -f d123.txt -o binlog_output.txt -d yes -i yes
-		python holmer_binlog_parse.py -uholmer -pholmer0319 -S /tmp/mysql_3325.sock -P3325 -f 000413.txt -t bpms.sale_shopping_cart_item -B bpms  -i yes -m normal -o binlog_out_normal.sql
+		time python binlog_parse.py  -uholmer -pholmer -h192.168.247.202 -P3306 -Btest -f d123.txt -o binlog_output.txt -d yes -i yes
+		python binlog_parse.py -uholmer -pholmer0319 -S /tmp/mysql_3325.sock -P3325 -f 000413.txt -t bpms.sale_shopping_cart_item -B bpms  -i yes -m normal -o binlog_out_normal.sql
 		如果编码报错, 则将 /disk2/holmer/d123.txt 文件进行编码转换或进行输出编码转换：
 			查看文件编码: vim /disk2/holmer/d123.txt, 然后输入 :set fileencoding 就可以查看文件编码了(假设这里是latin1)
 			方法一: 2.1 将 latin1 编码转换成 utf-8 编码: iconv -f latin1 -t utf-8 /disk2/holmer/d123.txt > /disk2/holmer/utf8_d123.txt
@@ -354,7 +354,7 @@ def parse_binlog_file():
 					3.2 修改 parse_binlog_file 函数中的 write_handle.write(table_rows.encode('utf-8') + '\n'), 将 utf-8 改为 latin1
 		总之, 在对文件进行操作前, 最好先对文件进行 utf-8 转码
 	单步调试方法: 
-		python -m pdb holmer_binlog_parse.py -uholmer -pholmer -h192.168.247.202 -P3306 -Btest -f d123.txt -o binlog_output.txt -d yes -i yes
+		python -m pdb binlog_parse.py -uholmer -pholmer -h192.168.247.202 -P3306 -Btest -f d123.txt -o binlog_output.txt -d yes -i yes
 """		
 if	__name__=='__main__':
 
